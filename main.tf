@@ -1,6 +1,6 @@
 resource "aws_docdb_subnet_group" "main" {
   name       = "${var.env}-${var.name}"
-  subnets = var.subnets
+  subnet_ids = var.subnets
 
   tags = merge(var.tags, { Name = "${var.name}-${var.env}-sng" })
 }
