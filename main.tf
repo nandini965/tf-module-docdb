@@ -1,3 +1,8 @@
+resource "aws_docdb_subnet_group" "main" {
+  name       = "${var.env}-${var.name}"
+  tags = "merge(var.tags, { Name = "${var.name}-${var.env}" })"
+}
+
 
 resource "aws_security_group" "docdb" {
   name        = "${var.name}-${var.env}-sg"
@@ -19,18 +24,12 @@ resource "aws_security_group" "docdb" {
     ipv6_cidr_blocks = ["::/0"]
   }
 
-  tags = {
-    Name = "${var.name}-${var.env}-sg"
+  tags = "merge(var.tags, { Name = "${var.name}-${var.env}-sg" })"
   }
-}
 
 
-resource "aws_docdb_subnet_group" "main" {
-  name       = "${var.env}-${var.name}"
-  tags = {
-    Name = "merge(var.tags, { Name = "${var.name}-${var.env}" })"
-  }
-}
+
+
 
 
 resource "aws_docdb_cluster" "docdb" {
@@ -54,13 +53,12 @@ resource "aws_docdb_cluster_parameter_group" "main" {
   name        = "${var.name}-${var.env}"
   description = "${var.name}-${var.env}"
 
-  tags = {
-    Name = "merge(var.tags, { Name = "${var.name}-${var.env}-pg" })"
-  }
+  tags = "merge(var.tags, { Name = "${var.name}-${var.env}-pg" })"
+
 }
-resource "aws_docdb_cluster_instance" "cluster_instances" {
-count              = var.instance_count
-identifier         = "${var.name}-${var.env}-${count.index}"
-cluster_identifier = aws_docdb_cluster.main.id
-instance_class     = "var.instance_class"
-}
+//resource "aws_docdb_cluster_instance" "cluster_instances" {
+//count              = var.instance_count
+//identifier         = "${var.name}-${var.env}-${count.index}"
+//cluster_identifier = aws_docdb_cluster.main.id
+//instance_class     = "var.instance_class"
+//}
