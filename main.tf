@@ -41,8 +41,8 @@ resource "aws_docdb_cluster_parameter_group" "main" {
 resource "aws_docdb_cluster" "docdb" {
   cluster_identifier      = "${var.env}-${var.name}"
   engine                  = "docdb"
-  master_username         = "data.aws_ssm_paramter_db_user.value"
-  master_password         = "data.aws_ssm_paramter_db_pass.value"
+  master_username         = data.aws_ssm_paramter_db_user.value
+  master_password         = data.aws_ssm_paramter_db_pass.value
   backup_retention_period = 5
   preferred_backup_window = "07:00-09:00"
   skip_final_snapshot     = true
