@@ -1,6 +1,6 @@
 resource "aws_docdb_subnet_group" "main" {
   name       = "${var.env}-${var.name}"
-  tags = "merge(var.tags, { Name = "${var.name}-${var.env}" })"
+  tags = merge(var.tags, { Name = "${var.name}-${var.env}-sng" })
 }
 
 
@@ -24,7 +24,7 @@ resource "aws_security_group" "docdb" {
     ipv6_cidr_blocks = ["::/0"]
   }
 
-  tags = "merge(var.tags, { Name = "${var.name}-${var.env}-sg" })"
+  tags = merge(var.tags, { Name = "${var.name}-${var.env}-sg" })
   }
 
 
@@ -53,7 +53,7 @@ resource "aws_docdb_cluster_parameter_group" "main" {
   name        = "${var.name}-${var.env}"
   description = "${var.name}-${var.env}"
 
-  tags = "merge(var.tags, { Name = "${var.name}-${var.env}-pg" })"
+  tags = merge(var.tags, { Name = "${var.name}-${var.env}-pg" })
 
 }
 
