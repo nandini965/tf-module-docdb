@@ -31,9 +31,6 @@ resource "aws_security_group" "docdb" {
 
 
 
-
-
-
 resource "aws_docdb_cluster" "docdb" {
   cluster_identifier      = "${var.env}-${var.name}"
   engine                  = "docdb"
@@ -50,7 +47,7 @@ resource "aws_docdb_cluster" "docdb" {
   port = var.port_no
   vpc_security_group_ids          = [aws_security_group.main.id]
   tags                            = merge(var.tags, { Name = "${var.name}-${var.env}" })
-}
+
 }
 
 resource "aws_docdb_cluster_parameter_group" "main" {
