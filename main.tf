@@ -48,7 +48,9 @@ resource "aws_docdb_cluster" "docdb" {
   storage_encrypted = true
   kms_key_id = var.kms_arn
   port = var.port_no
-  vpc_security_group_ids          = ["aws_security_group.main.id"]
+  vpc_security_group_ids          = [aws_security_group.main.id]
+  tags                            = merge(var.tags, { Name = "${var.name}-${var.env}" })
+}
 }
 
 resource "aws_docdb_cluster_parameter_group" "main" {
