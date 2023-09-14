@@ -1,7 +1,6 @@
 variable "tags" {}
 variable "env" {}
 variable "subnets" {}
-variable "value" {}
 variable "name" {
   default = "docdb"
 }
