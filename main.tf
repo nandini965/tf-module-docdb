@@ -57,9 +57,9 @@ resource "aws_docdb_cluster" "docdb" {
 
 }
 
-//resource "aws_docdb_cluster_instance" "cluster_instances" {
-//count              = var.instance_count
-//identifier         = "${var.name}-${var.env}-${count.index}"
-//cluster_identifier = aws_docdb_cluster.main.id
-//instance_class     = var.instance_class
-//}
+resource "aws_docdb_cluster_instance" "cluster_instances" {
+count              = var.instance_count
+identifier         = "${var.name}-${var.env}-${count.index}"
+cluster_identifier = aws_docdb_cluster.main.id
+instance_class     = var.instance_class
+}
