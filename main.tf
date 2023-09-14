@@ -58,8 +58,8 @@ resource "aws_docdb_cluster" "main" {
 }
 
  resource "aws_docdb_cluster_instance" "cluster_instances" {
- count              = 1
+ count              = var.instance_count
 identifier         = "${var.name}-${var.env}-${count.index}"
 cluster_identifier = aws_docdb_cluster.main.id
-instance_class     = "db.t3.medium"
+instance_class     = var.instance_class
 }
