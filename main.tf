@@ -1,5 +1,7 @@
 resource "aws_docdb_subnet_group" "main" {
   name       = "${var.env}-${var.name}"
+  subnet_ids = var.subnets
+
   tags = merge(var.tags, { Name = "${var.name}-${var.env}-sng" })
 }
 
@@ -14,7 +16,7 @@ resource "aws_security_group" "docdb" {
     from_port        = 27017
     to_port          = 27017
     protocol         = "tcp"
-    cidr_blocks      = var.allow_app_cidr
+    cidr_blocks      = var.allow_db_cidr
   }
   egress {
     from_port        = 0
