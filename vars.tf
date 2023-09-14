@@ -11,5 +11,6 @@ variable "kms_arn" {}
 variable "port_no" {
   default = 27017
 }
+variable "subnet_ids" {}
 //variable "instance_count" {}
 //variable "instance_class" {}
