@@ -12,7 +12,7 @@ resource "aws_security_group" "main" {
   vpc_id      = var.vpc_id
 
   ingress {
-    description      = "docdb"
+    description      = "DOCDB"
     from_port        = var.port_no
     to_port          = var.port_no
     protocol         = "tcp"
